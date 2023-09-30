@@ -3,11 +3,9 @@ import 'package:todo_app/colors.dart';
 
 class TextForm extends StatelessWidget {
   final String hintText;
-  final bool obscureText;
   const TextForm({
     super.key,
     required this.hintText,
-    required this.obscureText
   });
 
   @override
@@ -15,7 +13,6 @@ class TextForm extends StatelessWidget {
     return TextFormField(
       style: const TextStyle(color: ColorsPallete.gradient1),
       cursorColor: ColorsPallete.borderColor,
-      obscureText: obscureText,
       decoration: InputDecoration(
         hintStyle: const TextStyle(color: ColorsPallete.borderColor),
         contentPadding: const EdgeInsets.all(24),

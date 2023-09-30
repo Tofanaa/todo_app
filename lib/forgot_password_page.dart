@@ -13,11 +13,11 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  bool isSendEmail = false;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     const breakPoint = 550;
-    bool isSendEmail = false;
 
     //Smartphone Device
     if (breakPoint >= screenWidth) {
@@ -50,7 +50,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                 ),
                 const SizedBox(height: 48),
-                const TextForm(hintText: "Email", obscureText: false),
+                isSendEmail == true
+                    ? const SizedBox()
+                    : const TextForm(hintText: "Email"),
                 const SizedBox(height: 24),
                 Button(
                     labelButton: isSendEmail == true ? "Resend" : "Send",
@@ -94,74 +96,74 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(45),
             child: Center(
-                child: Container(
-                  width: 550.0,
-                  height: 600,
-                  padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
-                  decoration: BoxDecoration(
-                    color: ColorsPallete.backgroundColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Forgot Password",
-                        style: TextStyle(
-                          fontSize: 40,
-                          color: ColorsPallete.gradient1,
-                          fontWeight: FontWeight.bold,
-                        ),
+              child: Container(
+                width: 550.0,
+                height: 600,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
+                decoration: BoxDecoration(
+                  color: ColorsPallete.backgroundColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Column(
+                  children: [
+                    const Text(
+                      "Forgot Password",
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: ColorsPallete.gradient1,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        isSendEmail == true
-                            ? "We have sent email."
-                            : "Please, enter your email associated with your account and we'll send an email with link, where you can change your password",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white60,
-                          fontWeight: FontWeight.w300,
-                        ),
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      isSendEmail == true
+                          ? "We have sent email."
+                          : "Please, enter your email associated with your account and we'll send an email with link, where you can change your password",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white60,
+                        fontWeight: FontWeight.w300,
                       ),
-                      const SizedBox(height: 48),
-                      const TextForm(
-                        hintText: "Email",
-                        obscureText: false,
-                      ),
-                      const SizedBox(height: 24),
-                      Button(
-                          labelButton: isSendEmail == true ? "Resend" : "Send",
-                          onPressed: () {
-                            setState(() {
-                              isSendEmail = true;
-                            });
-                          }),
-                      const SizedBox(height: 24),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "Or you can",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white60,
-                              fontWeight: FontWeight.w300,
-                            ),
+                    ),
+                    const SizedBox(height: 48),
+                    isSendEmail == true
+                        ? const SizedBox()
+                        : const TextForm(hintText: "Email"),
+                    const SizedBox(height: 24),
+                    Button(
+                        labelButton: isSendEmail == true ? "Resend" : "Send",
+                        onPressed: () {
+                          setState(() {
+                            isSendEmail = true;
+                          });
+                        }),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Or you can",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white60,
+                            fontWeight: FontWeight.w300,
                           ),
-                          ButtonText(
-                              labelButton: "Login",
-                              onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => const LoginPage()));
-                              })
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        ButtonText(
+                            labelButton: "Login",
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => const LoginPage()));
+                            })
+                      ],
+                    ),
+                  ],
                 ),
               ),
+            ),
           ),
         ),
       );

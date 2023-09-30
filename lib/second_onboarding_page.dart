@@ -93,7 +93,8 @@ class SecondOnBoardingPage extends StatelessWidget {
             child: Container(
               width: 550.0,
               height: 600,
-              padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
+              padding: const EdgeInsets.only(
+                  top: 64, bottom: 48, left: 32, right: 32),
               decoration: BoxDecoration(
                 color: ColorsPallete.backgroundColor,
                 borderRadius: BorderRadius.circular(15),
@@ -133,7 +134,7 @@ class SecondOnBoardingPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 192),
+                  const SizedBox(height: 184),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

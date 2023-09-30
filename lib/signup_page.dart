@@ -5,6 +5,7 @@ import 'package:todo_app/widgets/button.dart';
 import 'package:todo_app/widgets/text_form.dart';
 
 import 'widgets/button_text.dart';
+import 'widgets/password_form.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -14,6 +15,20 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  bool _isHidePassword = true;
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
+
+  bool _isHideConfirmPass = true;
+  void _toggleConfirmPassVisibility() {
+    setState(() {
+      _isHideConfirmPass = !_isHideConfirmPass;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -38,11 +53,37 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 const SizedBox(height: 48),
-                const TextForm(hintText: "Email", obscureText: false),
+                const TextForm(hintText: "Email"),
                 const SizedBox(height: 16),
-                const TextForm(hintText: "Password", obscureText: true),
+                PasswordForm(
+                  hintText: "Password",
+                  isHide: _isHidePassword,
+                  obscureFunction: GestureDetector(
+                    onTap: () {
+                      _togglePasswordVisibility();
+                    },
+                    child: Icon(
+                      _isHidePassword ? Icons.visibility_off : Icons.visibility,
+                      color: ColorsPallete.borderColor,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
-                const TextForm(hintText: "Confirm Password", obscureText: true),
+                PasswordForm(
+                  hintText: "Confirm Password",
+                  isHide: _isHideConfirmPass,
+                  obscureFunction: GestureDetector(
+                    onTap: () {
+                      _toggleConfirmPassVisibility();
+                    },
+                    child: Icon(
+                      _isHideConfirmPass
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: ColorsPallete.borderColor,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 24),
                 Button(labelButton: "Signup", onPressed: () {}),
                 const SizedBox(height: 24),
@@ -83,7 +124,8 @@ class _SignupPageState extends State<SignupPage> {
             child: Container(
               width: 550.0,
               height: 600,
-              padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
+              padding: const EdgeInsets.only(
+                  top: 64, bottom: 48, left: 32, right: 32),
               decoration: BoxDecoration(
                 color: ColorsPallete.backgroundColor,
                 borderRadius: BorderRadius.circular(15),
@@ -99,12 +141,39 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ),
                   const SizedBox(height: 48),
-                  const TextForm(hintText: "Email", obscureText: false),
+                  const TextForm(hintText: "Email"),
                   const SizedBox(height: 16),
-                  const TextForm(hintText: "Password", obscureText: true),
+                  PasswordForm(
+                    hintText: "Password",
+                    isHide: _isHidePassword,
+                    obscureFunction: GestureDetector(
+                      onTap: () {
+                        _togglePasswordVisibility();
+                      },
+                      child: Icon(
+                        _isHidePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: ColorsPallete.borderColor,
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 16),
-                  const TextForm(
-                      hintText: "Confirm Password", obscureText: true),
+                  PasswordForm(
+                    hintText: "Confirm Password",
+                    isHide: _isHideConfirmPass,
+                    obscureFunction: GestureDetector(
+                      onTap: () {
+                        _toggleConfirmPassVisibility();
+                      },
+                      child: Icon(
+                        _isHideConfirmPass
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: ColorsPallete.borderColor,
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   Button(labelButton: "Sign up", onPressed: () {}),
                   const SizedBox(height: 24),

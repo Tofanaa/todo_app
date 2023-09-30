@@ -3,6 +3,7 @@ import 'package:todo_app/colors.dart';
 import 'package:todo_app/forgot_password_page.dart';
 import 'package:todo_app/signup_page.dart';
 import 'package:todo_app/widgets/button.dart';
+import 'package:todo_app/widgets/password_form.dart';
 import 'package:todo_app/widgets/text_form.dart';
 
 import 'widgets/button_text.dart';
@@ -15,6 +16,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isHidePassword = true;
+  bool _isHidePasswordDesktop = true;
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
+
+  void _togglePasswordVisibilityDesktop() {
+    setState(() {
+      _isHidePasswordDesktop = !_isHidePasswordDesktop;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -39,11 +54,20 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 48),
-                const TextForm(hintText: "Email", obscureText: false),
+                const TextForm(hintText: "Email"),
                 const SizedBox(height: 16),
-                const TextForm(
+                PasswordForm(
                   hintText: "Password",
-                  obscureText: true,
+                  isHide: _isHidePassword,
+                  obscureFunction: GestureDetector(
+                    onTap: () {
+                      _togglePasswordVisibility();
+                    },
+                    child: Icon(
+                      _isHidePassword ? Icons.visibility_off : Icons.visibility,
+                      color: ColorsPallete.borderColor,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Button(labelButton: "Login", onPressed: () {}),
@@ -110,12 +134,22 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 48),
                   const TextForm(
                     hintText: "Email",
-                    obscureText: false,
                   ),
                   const SizedBox(height: 16),
-                  const TextForm(
+                  PasswordForm(
                     hintText: "Password",
-                    obscureText: true,
+                    isHide: _isHidePasswordDesktop,
+                    obscureFunction: GestureDetector(
+                      onTap: () {
+                        _togglePasswordVisibilityDesktop();
+                      },
+                      child: Icon(
+                        _isHidePasswordDesktop
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: ColorsPallete.borderColor,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 24),
                   Button(labelButton: "Login", onPressed: () {}),
